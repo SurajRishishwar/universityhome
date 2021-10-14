@@ -1,0 +1,137 @@
+.wrapper {
+    text-align: center;
+    font-size: 30px;
+}
+
+.img-area {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.img {
+    margin: 10px;
+}
+
+.img:hover {
+    transform: scale(1.1);
+    border: 3px solid darkred;
+}
+
+nav ol li a {
+    color: darkred;
+}
+
+a:hover {
+    color: darkred;
+    font-size: 1.2em;
+}
+
+.eventName {
+    background-color: darkred;
+    color: white;
+}
+
+input {
+    width: 35vw;
+    height: 40px;
+    border: 1px solid darkred;
+    border-radius: 10px;
+    outline: none;
+}
+
+body {
+    background-color: #e9ecef;
+}
+
+@media (max-width: 768px) {
+    input {
+        margin-right: 20px;
+        width: 60vw;
+        height: 40px;
+        border: 1px solid darkred;
+        border-radius: 10px;
+        outline: none;
+    }
+}
+
+ ::placeholder {
+    padding: 20px;
+}
+
+
+/* ###### */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modalImage {
+    margin: auto;
+    display: block;
+    width: 100%;
+    height: 80%;
+    max-width: 800px;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: white;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(255, 0, 0);
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+    .modalImage {
+        width: 90%;
+        height: 50%;
+    }
+}
+
+.darkredButton {
+    background-color: darkred;
+    color: white;
+    padding: 8px 20px;
+    outline: none;
+    border-radius: 9px;
+    border: 1px solid white;
+}
+
+.darkredButton:hover {
+    transform: scale(1.2);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}

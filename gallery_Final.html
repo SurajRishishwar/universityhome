@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <link rel="stylesheet" href="gallery.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@700&family=Bad+Script&family=Delius&family=Just+Another+Hand&family=Staatliches&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto+Condensed:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sumana&display=swap" rel="stylesheet">
+    <style type="text/css">
+        .b {
+            padding: 20px;
+        }
+        
+        .frame {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .zoomin img {
+            height: 90%;
+            width: 90%;
+            overflow: hidden;
+            -webkit-transition: all 2s ease;
+            -moz-transition: all 2s ease;
+            -ms-transition: all 2s ease;
+            transition: all 2s ease;
+        }
+        
+        .zoomin img:hover {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .content {
+            font-size: large;
+            margin: 70px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        .uppern {
+            background-color: rgb(207, 181, 59);
+            height: 6px;
+            max-width: 100%;
+        }
+        
+        body {
+            padding: 0px;
+            margin: 0px;
+            background-color: white;
+            overflow-x: hidden;
+        }
+        
+        .name-holder {
+            background-color: darkred;
+            height: 110px;
+            max-width: 100%;
+            display: flex;
+        }
+        
+        .name-holder>div {
+            margin: 1.5px;
+        }
+        
+        .logo {
+            height: inherit;
+            margin-left: 2em;
+        }
+        
+        .logotext {
+            padding-top: 20px;
+            margin: 10px;
+            color: white;
+            font-family: 'Lora', serif;
+            font-size: 24px;
+            font-style: italic;
+        }
+        
+        .logotext span {
+            font-family: 'Lora', serif;
+            color: white;
+            font-weight: 28px;
+        }
+        
+        .name-holder img {
+            padding-top: 10px;
+            padding-left: 10px;
+            width: 100px;
+            height: 100px;
+        }
+        
+        #blurring {
+            opacity: 0.2;
+        }
+        
+        .blurimg {
+            position: relative;
+        }
+        
+        .ah1 {
+            position: absolute;
+            font-family: 'Alegreya SC', serif;
+            font-weight: 100;
+            font-size: 20px;
+            color: rgb(34, 41, 139);
+            left: 70px;
+            bottom: 120px;
+        }
+        
+        .ah2 {
+            position: absolute;
+            font-family: 'Staatliches', cursive;
+            font-weight: 400;
+            font-size: 3.5em;
+            color: rgb(33, 38, 99);
+            left: 70px;
+            bottom: 30px;
+        }
+        
+        .ah3 {
+            position: absolute;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 400;
+            font-size: 50px;
+            color: rgb(33, 38, 99);
+            left: 70px;
+            bottom: 30px;
+        }
+        
+        .underLineBar {
+            position: absolute;
+            background-color: rgb(207, 181, 59);
+            height: 6px;
+            width: 110px;
+            left: 70px;
+            bottom: 70px;
+        }
+        
+        #container {
+            position: relative;
+        }
+        
+        #container img {
+            position: absolute;
+            z-index: 9;
+            top: -170px;
+            right: 0px;
+        }
+        
+        .infoB {
+            width: 100%;
+            height: 100px;
+            padding-top: 15px;
+            font-size: 25px;
+            margin-left: 80px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: rgb(34, 41, 139);
+            font-size: 25px;
+            font-style: italic;
+        }
+        
+        .infoB p {
+            margin: 0px;
+        }
+        
+        .main {
+            padding-top: 60px;
+            height: 800px;
+            max-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-template-areas: "box1 box2 box3";
+        }
+        
+        .box1 {
+            background-color: white;
+            margin-top: 45px;
+        }
+        
+        .box2 {
+            background-color: white;
+            padding-top: 10px;
+            padding-left: 25px;
+            padding-right: 20px;
+            /*font-family: Verdana, Geneva, Tahoma, sans-serif;*/
+            /*font-family: "Libre Franklin", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;*/
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 20px;
+            line-height: 1.56;
+            color: #333333;
+        }
+        
+        .box3 {
+            background-color: white;
+            padding-top: 30px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .box3 img {
+            margin-left: 65px;
+        }
+        
+        .lowermain {
+            padding-top: 70px;
+            height: 600px;
+            max-width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            /*grid-template-areas: "box4 box5 box6 . ."
+        "box7 . box8 box9 box10";*/
+        }
+        
+        .box4 {
+            background-color: white;
+            grid-column: 1/2;
+            align-self: center;
+            text-align: center;
+        }
+        
+        .box5 {
+            background-color: white;
+            ;
+            grid-column: 2/3;
+            align-self: center;
+            text-align: center
+        }
+        
+        .box6 {
+            /*background-color: blanchedalmond;*/
+            background-image: linear-gradient(to bottom right, rgba(255, 0, 0, 1), darkred);
+            /*background-image: url('Background-dark.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;*/
+            grid-column: 3/6;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .box7 {
+            background-image: linear-gradient(to bottom right, darkred, rgba(255, 0, 0, 1));
+            grid-column: 1/3;
+            align-self: center;
+            text-align: center;
+        }
+        
+        .box8 {
+            background-color: white;
+            grid-column: 3/4;
+            align-self: center;
+            text-align: center;
+        }
+        
+        .box9 {
+            background-color: white;
+            grid-column: 4/5;
+            align-self: center;
+            text-align: center;
+        }
+        
+        .box10 {
+            background-color: white;
+            grid-column: 5/6;
+            align-self: center;
+            text-align: center;
+        }
+        
+        #b1 {
+            text-align: left;
+            font-size: 20px;
+            padding: 3px 3px 3px 3px;
+            margin-left: 20px;
+            height: 45px;
+            font-family: 'Verdana';
+            font-style: oblique;
+            color: rgba(190, 22, 22, 0.856);
+            font-style: bold;
+        }
+        
+        #b1:hover {
+            background-color: rgba(165, 166, 189, 0.664);
+        }
+        
+        a {
+            text-decoration: none;
+            color: rgb(34, 41, 139);
+        }
+        
+        #quote {
+            font-size: 20px;
+            font-family: 'Sumana', serif;
+            color: #103057;
+            line-height: 30px;
+            font-weight: 400;
+            font-style: italic;
+        }
+        
+        #quoteBy {
+            font-size: 20px;
+            font-family: 'Bad Script', cursive;
+            color: #103057;
+            line-height: 25px;
+            font-weight: 400;
+        }
+        
+        .icon {
+            width: 25%;
+            display: block;
+            margin-left: 115px;
+        }
+        
+        .LinerMain {
+            margin-top: -12px;
+            font-size: 30px;
+            color: #ae9142;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+        
+        .Liner {
+            margin-top: -35px;
+            font-size: 20px;
+            color: #28117ee8;
+            font-family: 'Sumana', serif;
+        }
+        
+        .Liner2 {
+            margin-top: -25px;
+            font-size: 25px;
+            color: rgb(243, 209, 147);
+            font-family: 'Oswald', sans-serif;
+            font-style: bold;
+            line-height: 30px;
+        }
+        
+        .icon2 {
+            width: 50%;
+            margin-left: 40px;
+            margin-top: 50px;
+        }
+        
+        .LinerMain1 {
+            margin-top: -9px;
+            font-size: 30px;
+            color: whitesmoke;
+            font-family: 'Roboto Condensed', sans-serif;
+            margin-left: 35px;
+        }
+        
+        .Liner1 {
+            line-height: 30px;
+            font-size: 30px;
+            color: rgb(243, 209, 147);
+            font-family: 'Oswald', sans-serif;
+            font-style: bold;
+        }
+        
+        .icon3 {
+            width: 20%;
+            margin-left: 35px;
+            margin-top: 50px;
+        }
+        
+        .Box2_subHead {
+            color: rgb(34, 41, 139);
+            font-family: "Libre Franklin", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+            font-weight: 700;
+            font-size: 30px;
+        }
+        
+        .ajmerlower {
+            padding-left: 40px;
+        }
+        
+        .tcoh {
+            float: inline-start;
+            text-align: center;
+        }
+        
+        .box2_sh1 {
+            color: rgb(34, 41, 139);
+            text-decoration: underline;
+        }
+        
+        .Box2_subHead2 {
+            color: rgb(34, 41, 139);
+            font-family: "Libre Franklin", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+            font-weight: 700;
+            font-size: 25px;
+        }
+        /*Media queries */
+        
+        @media (max-width: 1696px) {
+            .infoB {
+                margin-left: 0px !important;
+            }
+            body {
+                overflow-x: hidden !important;
+            }
+        }
+        
+        @media (max-width: 1396px) {
+            #container {
+                position: relative;
+            }
+            #container img {
+                position: absolute;
+                z-index: 0;
+                top: 100px;
+                padding-left: 10px;
+                left: 300px;
+            }
+            .main {
+                padding-top: 300px;
+                height: 1100px;
+            }
+            .infoB {
+                margin-left: 0px !important;
+            }
+            body {
+                overflow-x: hidden !important;
+            }
+            .custom-section {
+                padding: 20px !important;
+                margin: 0px !important;
+                width: 540px !important;
+            }
+            .custom-section-1 {
+                padding-left: 20px !important;
+                padding-bottom: 6px !important;
+                width: 500px !important;
+                margin-left: 100px !important;
+            }
+            .custom-section-2 {
+                padding: 20px !important;
+                padding-left: 600px !important;
+                margin: 0px !important;
+                width: 450px !important;
+                margin-top: -610px !important;
+            }
+            .custom-section-2 h2 {
+                font-size: 20px !important;
+            }
+        }
+        
+        @media (max-width: 956px) {
+            #container {
+                position: relative;
+            }
+            #container img {
+                position: absolute;
+                z-index: 0;
+                top: 100px;
+                padding-left: 10px;
+                left: 300px;
+            }
+            .main {
+                padding-top: 300px;
+                height: 1300px;
+            }
+            .lowermain {
+                padding-top: 70px;
+                height: 600px;
+                max-width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr 1fr;
+            }
+            .box4 {
+                grid-column: 1/2;
+            }
+            .box5 {
+                grid-column: 3/4;
+            }
+            .box6 {
+                grid-column: 1/4;
+            }
+            .box7 {
+                grid-column: 1/4;
+            }
+            .box8 {
+                grid-column: 1/2;
+            }
+            .box9 {
+                grid-column: 2/3;
+            }
+            .box10 {
+                grid-column: 3/4;
+            }
+            .box1 div {
+                margin-top: 50px;
+                margin-bottom: 30px;
+            }
+            .custom-section {
+                padding: 0px !important;
+                padding-top: 18px!important;
+                margin: 0px !important;
+                margin-left: 80px!important;
+            }
+            .custom-section-1 {
+                padding-left: 0px !important;
+                padding-bottom: 6px !important;
+                width: 500px !important;
+                margin-left: 100px!important;
+            }
+            .lowermain {
+                margin-top: 175px;
+            }
+            .table-cus {
+                margin: 0px;
+                padding: 0px;
+                font-size: 10px !important;
+            }
+            i,
+            td {
+                font-size: 10px !important;
+            }
+            td,
+            .font-cus {
+                font-size: 17px !important;
+            }
+            .infoB {
+                margin-left: 0px !important;
+            }
+            body {
+                overflow-x: hidden !important;
+            }
+        }
+        
+        @media (max-width: 720px) {
+            .custom-section {
+                padding: 0px !important;
+                width: 380px !important;
+                padding-top: 15px !important;
+                margin: 0px !important;
+                padding-right: 0px !important;
+                margin-right: 20px !important;
+            }
+            .custom-section-1 {
+                padding-left: 0px !important;
+                padding-bottom: 6px !important;
+                width: 450px !important;
+                margin-left: 25px !important;
+            }
+            .lowermain {
+                margin-top: 175px;
+            }
+            .table-cus {
+                margin: 0px;
+                padding: 0px;
+                font-size: 10px !important;
+            }
+            i,
+            td {
+                font-size: 10px !important;
+            }
+            td,
+            .font-cus {
+                font-size: 17px !important;
+            }
+            .infoB {
+                margin-left: 0px;
+            }
+            .logotext {
+                font-size: 15px;
+            }
+            #container {
+                position: relative;
+            }
+            #container img {
+                position: absolute;
+                z-index: 0;
+                top: 100px;
+                padding-left: 0px;
+                left: 0px;
+                width: auto;
+            }
+            .main {
+                padding-top: 300px;
+                height: 1300px;
+            }
+            .lowermain {
+                padding-top: 70px;
+                height: 600px;
+                max-width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            }
+            .box4 {
+                grid-column: 2/3;
+            }
+            .box5 {
+                grid-column: 2/3;
+            }
+            .box6 {
+                grid-column: 1/4;
+                padding-right: 2px;
+            }
+            .box7 {
+                grid-column: 1/4;
+            }
+            .box8 {
+                grid-column: 2/3;
+            }
+            .box9 {
+                grid-column: 2/3;
+            }
+            .box10 {
+                grid-column: 2/3;
+            }
+            .icon {
+                width: 25%;
+                display: block;
+                margin-left: 95px;
+            }
+            .main {
+                grid-template-columns: 1fr 4fr;
+                grid-template-rows: 1fr 1fr;
+            }
+            .box1 {
+                grid-column: 1/2;
+            }
+            .box2 {
+                grid-column: 2/4;
+            }
+            .box3 {
+                grid-column: 1/4;
+                display: block;
+                justify-content: center;
+            }
+            .box3 img {
+                margin-left: 250px;
+            }
+            #quote {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+            #quoteBy {
+                padding-left: 100px;
+            }
+            .box1 {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            body {
+                overflow-x: hidden !important;
+            }
+            .infoB {
+                margin-left: 0px !important;
+            }
+            .ht h1 {
+                padding-top: 25px;
+            }
+        }
+        
+        @media (max-width: 518px) {
+            .lowermain {
+                margin-top: 175px;
+            }
+            .custom-section {
+                padding: 0px !important;
+                margin: 0px !important;
+                width: 380px !important;
+                margin-top: 20px !important;
+            }
+            .custom-section-1 {
+                padding-left: 0px !important;
+                padding-bottom: 6px !important;
+                width: 300px !important;
+                margin-left: 25px !important;
+            }
+            .ht h1 {
+                padding-top: 90px !important;
+            }
+            .infoB {
+                margin-left: 0px !important;
+            }
+            body {
+                overflow-x: hidden !important;
+            }
+            .ah2 {
+                font-size: 3.5em !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="uppern"> </div>
+    <div class="name-holder">
+        <div class="symbol">
+            <a href="index.html">
+                <img src="logo.png" alt="NA-img">
+            </a>
+        </div>
+        <div class="logo">
+            <div class="logotext">
+                <span> MAHARSHI DAYANAND SARASWATI UNIVERSITY</span> ,Ajmer
+            </div>
+        </div>
+    </div>
+
+    <div class="blurimg">
+        <img src="banner.jpg" alt="" width="100%" id="blurring" height="290px">
+        <p class="ah2"><u>Photo Gallery</u></p>
+    </div>
+    <!-- <div id="container"> -->
+    <div class="infoB" style="padding: 20px;">
+        <p>A place born with the goal of nation building,situated in the green oasis</p>
+        <p>- Ajmer!</p>
+
+    </div>
+
+    <!-- </div> -->
+
+    <!-- <nav aria-label="breadcrumb ">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item "><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Photo Gallery</li>
+        </ol>
+    </nav> -->
+    <br><br>
+    <br><br>
+    <div class="row word-wrap">
+
+        <!-- <div class="mx-auto mb-3">
+            <form class="form-inline my-2 my-lg-0 ">
+                <input class="form  mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="darkredButton my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div> -->
+    </div>
+
+    <div class="wrapper">
+        <!-- <h2 class="eventName">Event 1</h2> -->
+        <div class="img-area">
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4741.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4743.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4745.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4746.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4747.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4749.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4750.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4751.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4752.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4754.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4755.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4756.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4757.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4759.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4760.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4762.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4764.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4765.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4766.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4767.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4769.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4771.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4772.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4774.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4775.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4777.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4779.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4782.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4783.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4786.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4788.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4789.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4790.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4791.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4792.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4793.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4795.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4796.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4797.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4798.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4800.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4801.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4803.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4807.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4834.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4835.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4836.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4837.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4838.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4839.JPG" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="Photos/IMG_4842.JPG" alt="" width="300" height="200"> </div>
+        </div>
+        <!-- <h2 class="eventName">Event 2</h2>
+        <div class="img-area">
+            <div class="img ImgThumbnail"><img src="3.jpg" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="3.jpg" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="3.jpg" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="3.jpg" alt="" width="300" height="200"> </div>
+        </div>
+        <h2 class="eventName">Event 3</h2>
+        <div class="img-area">
+            <div class="img ImgThumbnail"><img src="4.jpg" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail "><img src="4.jpg" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="4.jpg" alt="" width="300" height="200"> </div>
+            <div class="img ImgThumbnail"><img src="4.jpg" alt="" width="300" height="200"> </div>
+        </div> -->
+    </div>
+
+    <div class="modal">
+        <span class="close">×</span>
+        <img class="modalImage" id="img01" />
+    </div>
+
+    <script>
+        var modalEle = document.querySelector(".modal");
+        var modalImage = document.querySelector(".modalImage");
+        Array.from(document.querySelectorAll(".ImgThumbnail")).forEach(item => {
+            item.addEventListener("click", event => {
+                modalEle.style.display = "block";
+                modalImage.src = event.target.src;
+            });
+        });
+        document.querySelector(".close").addEventListener("click", () => {
+            modalEle.style.display = "none";
+        });
+    </script>
+</body>
+
+</html>
