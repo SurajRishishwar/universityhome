@@ -6,7 +6,7 @@
   height: 80px;
   position: fixed;
   z-index: 2;
-  left: 85px;
+  left: 45px;
 
 }
 .logoo img{
@@ -14,7 +14,12 @@
   height:100%;
   border-radius: 50%;
 }
+#toggle{
+  position: absolute;
 
+  padding-left: 0px;
+  right: 30px;
+}
 nav{
   display: flex;
   height:40px;
@@ -121,10 +126,16 @@ nav ul .search-icon .icon span{
   color: black;
   font-size: 18px;
 }
-@media (max-width: 1000px){
+/* @media (max-width: 1000px){
    nav{
     padding: 0 40px 0 50px;
    } 
+} */
+@media (max-width:1191px){
+  #nav2 ul li{
+    display: block;
+    width: 100%;
+  }
 }
 @media (max-width: 1190px) {
    nav .menu-btn i{
@@ -134,7 +145,14 @@ nav ul .search-icon .icon span{
   #click:checked ~ .menu-btn i:before{
     content: "\f00d";
   }
-  nav ul{
+  #nav1 ul{
+    padding-top: 15px;
+    justify-content: flex-end;
+  }
+  #nav1 ul li a{
+    margin-left:-25px;
+  }
+  #nav2 ul{
     position: fixed;
     top: 80px;
     padding-top: 15px;
@@ -144,7 +162,7 @@ nav ul .search-icon .icon span{
     height: 100vh;
     width: 100%;
     text-align: center;
-    display: block;
+
     transition: all 0.3s ease;
     /* opacity: 0.7; */
   }
@@ -159,13 +177,11 @@ nav ul .search-icon .icon span{
 
  
   }
-  .logoo{
-    left:90%;
-  }
+  
   nav ul li a{
     width: 100%;
     margin-left: -100%;
-    /* display: block; */
+    display: block;
     font-size: 20px;
     transition: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
@@ -359,10 +375,10 @@ float: left;
 .show + a{
     display: none;
 }
-#nav2 ul li{
+ #nav2 ul li{
     display: block;
     width: 100%;
-}
+ } 
   #nav2 ul ul li{
     display: block;
     width: 100%;
@@ -411,42 +427,12 @@ float: left;
   display: block;
 }
 }
+@media (max-width:385px){ 
 
-@media (max-width:875px){ 
+ #nav1 ul li a{
+   font-size: 15px;
+ }
  .logoo{
-   left: 750px;
+   left:5px;
  }
-}
-
-@media (max-width:835px){ 
-  .logoo{
-    left: 650px;
-  }
- }
-
- @media (max-width:740px){ 
-  .logoo{
-    left: 550px;
-  }
- }
-
- @media (max-width:635px){ 
-  .logoo{
-    left: 450px;
-  }
- }
- @media (max-width:535px){ 
-  .logoo{
-    left: 350px;
-  }
- }
- @media (max-width:435px){ 
-  .logoo{
-    left: 250px;
-  }
- }
- @media (max-width:335px){ 
-  .logoo{
-    left: 220px;
-  }
  }
