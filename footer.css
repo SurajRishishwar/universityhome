@@ -12,19 +12,19 @@ footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
 .padding-right { padding-right:10px; }
 
 .footer_ul2_amrc {margin:0px; list-style-type:none; padding:0px;}
-.footer_ul2_amrc li p { display:table; }
+.footer_ul2_amrc li p { display:table !important; }
 .footer_ul2_amrc li a:hover { text-decoration:none;}
 .footer_ul2_amrc li i { margin-top:5px;}
 
 .bottom_border { border-bottom:1px solid white; padding-bottom:20px;}
-h5{
+footer h5{
     font-size: 30px;
     color:white;
 }
 .foote_bottom_ul_amrc {
 	list-style-type:none;
 	padding:0px;
-	display:table;
+	display:table !important;
 	margin-top: 10px;
 	margin-right: auto;
 	margin-bottom: 10px;
